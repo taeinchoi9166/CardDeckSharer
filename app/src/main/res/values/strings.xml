@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MagicDeckSharer</string>
     <string name="action_settings">Settings</string>
+    <string name="open_drawer">open</string>
+    <string name="close_drawer">close</string>
 </resources>
