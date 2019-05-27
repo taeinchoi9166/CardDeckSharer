@@ -41,13 +41,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.ic_menu_white);
 
-//        navDrawer = findViewById(R.id.nav_drawer);
-//        navView = findViewById(R.id.nav_view);
-//        drawerToggle = new ActionBarDrawerToggle(this,navDrawer,toolbar,R.string.open_drawer,R.string.close_drawer);
-//        navDrawer.addDrawerListener(drawerToggle);
-//        navView.setNavigationItemSelectedListener(this);
-//
-//        navDrawer.openDrawer(navView);
+        navDrawer = findViewById(R.id.nav_drawer);
+        navView = findViewById(R.id.nav_view);
+        drawerToggle = new ActionBarDrawerToggle(this,navDrawer,toolbar,R.string.open_drawer,R.string.close_drawer);
+        navDrawer.addDrawerListener(drawerToggle);
+        navView.setNavigationItemSelectedListener(this);
     }
 
     @Override

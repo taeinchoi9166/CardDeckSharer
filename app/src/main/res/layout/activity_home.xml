@@ -17,19 +17,20 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:elevation="5dp">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="#333"
+                app:titleTextColor="@color/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-            <LinearLayout
+            <include
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                layout="@layout/content_home"/>
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/fab"
@@ -39,17 +40,16 @@
                     android:layout_margin="@dimen/fab_margin"
                     app:srcCompat="@android:drawable/ic_dialog_email" />
 
-                <android.support.design.widget.NavigationView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/nav_view"
-                    android:layout_gravity="start"
-                    app:menu="@menu/nav_menu"
-                    android:fitsSystemWindows="true"
-                    />
-            </LinearLayout>
-        </android.support.design.widget.AppBarLayout>
 
+        </android.support.design.widget.AppBarLayout>
+        <android.support.design.widget.NavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/nav_view"
+            android:layout_gravity="left"
+            app:menu="@menu/nav_menu"
+            android:fitsSystemWindows="true"
+            />
 
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
