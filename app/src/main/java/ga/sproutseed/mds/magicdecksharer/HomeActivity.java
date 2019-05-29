@@ -1,15 +1,21 @@
 package ga.sproutseed.mds.magicdecksharer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,23 +61,50 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
+        Intent intent = null;
+        switch (menuItem.getItemId()){
+            case R.id.myDeck:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                View v = inflater.inflate(R.layout.login_dialog,null);
+                builder.setView(v);
+                builder.setPositiveButton("로그인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.setNegativeButton("취소",null);
+                builder.create().show();
+
+                intent = new Intent(getApplicationContext(),MyDeckActivity.class);
+                intent.putExtra("username","user");
+                startActivity(intent);
+                break;
+            case R.id.makeDeck:
+                intent = new Intent(getApplicationContext(),EditDeckActivity.class);
+                intent.putExtra("deckIdx",-1);
+                startActivityForResult(intent,3000);
+                break;
+            case R.id.getUsersDeck:
+                intent = new Intent(getApplicationContext(),UploadActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
+
+
+    @Override
+    public void onBackPressed(){
+        if(navDrawer.isDrawerOpen(GravityCompat.START)){
+            navDrawer.closeDrawers();
+        }else{
+            super.onBackPressed();
+        }
     }
 }

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="title"
+        android:title="My decks"
         android:icon="@mipmap/ic_launcher_round"
-        android:id="@+id/item"/>
+        android:id="@+id/myDeck"/>
+    <item
+        android:title="Add new deck"
+        android:icon="@mipmap/ic_launcher_round"
+        android:id="@+id/makeDeck"/>
+    <item
+        android:title="Uploaded deck"
+        android:icon="@mipmap/ic_launcher_round"
+        android:id="@+id/getUsersDeck"/>
 </menu>
