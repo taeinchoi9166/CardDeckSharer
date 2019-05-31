@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout navDrawer;
@@ -63,25 +64,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Intent intent = null;
+        AlertDialog.Builder builder = null;
+        LayoutInflater inflater = null;
+        View v = null;
         switch (menuItem.getItemId()){
             case R.id.myDeck:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+               builder = new AlertDialog.Builder(this);
 
-                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                View v = inflater.inflate(R.layout.login_dialog,null);
+                inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                v = inflater.inflate(R.layout.login_dialog,null);
                 builder.setView(v);
                 builder.setPositiveButton("로그인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        final Intent redirectIntent = new Intent(getApplicationContext(),MyDeckActivity.class);
+                        redirectIntent.putExtra("username","user");
+                        startActivity(redirectIntent);
                     }
                 });
+
                 builder.setNegativeButton("취소",null);
                 builder.create().show();
 
-                intent = new Intent(getApplicationContext(),MyDeckActivity.class);
-                intent.putExtra("username","user");
-                startActivity(intent);
                 break;
             case R.id.makeDeck:
                 intent = new Intent(getApplicationContext(),EditDeckActivity.class);
@@ -91,6 +95,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.getUsersDeck:
                 intent = new Intent(getApplicationContext(),UploadActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.registerUser:
+               builder = new AlertDialog.Builder(this);
+                AlertDialog alertDialog = null;
+                EditText id = null, password = null,passwordConfirm = null;
+
+                inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                v = inflater.inflate(R.layout.login_dialog,null);
+                builder.setView(v);
+
+                id = alertDialog.findViewById(R.id.user_id);
+                password = alertDialog.findViewById(R.id.user_password);
+                passwordConfirm = alertDialog.findViewById(R.id.user_passwordConfirm);
+
+                builder.setPositiveButton("사용자 추가", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(password.getText().toString().equals(passwordConfirm.getText().toString())){
+
+                        }
+                    }
+                });
+
+                builder.setNegativeButton("취소",null);
+
+                alertDialog = builder.create();
+
+
+                alertDialog.show();
                 break;
         }
         return true;
